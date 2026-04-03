@@ -1,8 +1,8 @@
 # dms-minimize
 
-macOS-style window minimize for Hyprland + DMS (DankMaterialShell).
+macOS-style window minimize for Hyprland + DMS (DankMaterialShell). Minimized windows appear as separate dimmed icons in the DMS dock. Click to restore.
 
-Minimized windows appear as separate dimmed icons in the DMS dock. Click to restore.
+<img width="725" height="182" alt="image" src="https://github.com/user-attachments/assets/18c29ecd-c29e-4605-ab72-1beeb17ad529" />
 
 ## How it works
 
