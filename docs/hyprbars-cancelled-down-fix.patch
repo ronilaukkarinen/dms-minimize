@@ -1,0 +1,20 @@
+diff --git a/hyprbars/barDeco.cpp b/hyprbars/barDeco.cpp
+index e9fbb4f..b284f54 100644
+--- a/hyprbars/barDeco.cpp
++++ b/hyprbars/barDeco.cpp
+@@ -170,6 +170,15 @@ void CHyprBar::onTouchMove(Event::SCallbackInfo& info, ITouch::SMotionEvent e) {
+ }
+ 
+ void CHyprBar::handleDownEvent(Event::SCallbackInfo& info, std::optional<ITouch::SDownEvent> touchEvent) {
++    // Defensive reset: m_bCancelledDown can persist from a previous press
++    // whose matching release was dropped (e.g. bar button minimized the
++    // window; the workspace became invisible before the user released, so
++    // inputIsValid() failed and handleUpEvent() never ran). Without this
++    // reset, the next release after unminimize would be incorrectly
++    // cancelled, leaving the client with a stuck-held button state
++    // (manifests as an unwanted drag/selection on the very next click).
++    m_bCancelledDown = false;
++
+     m_bTouchEv = touchEvent.has_value();
+     if (m_bTouchEv)
+         m_touchId = touchEvent.value().touchID;
